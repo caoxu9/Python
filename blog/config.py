@@ -1,11 +1,11 @@
 class Config:
     WTF_CSRF_ENABLED = True
-    SECRET_KEY = 'www.uplooking.com'
+    SECRET_KEY = 'qqqqqwewewewe'
     MAIL_SERVER = 'smtp.qq.com'
     MAIL_PORT = '587'
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'itsdangerous@foxmail.com'
-    MAIL_PASSWORD = 'ociuaxqsfvrxdhia'
+    MAIL_USERNAME = 'email'
+    MAIL_PASSWORD = 'password'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
