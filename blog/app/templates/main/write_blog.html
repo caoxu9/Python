@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block page_content %}
+ {% import 'bootstrap/wtf.html'as wtf %}
+    {% if current_user.has_permission(Permission.WRITE) %}
+        {{ wtf.quick_form(form) }}
+    {% endif %}
+{% endblock %}

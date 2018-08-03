@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        {% if current_user.is_admin() %}
+            <a href="{{ url_for('manager.manager_user') }}" class="btn btn-info">
+                用户管理
+            </a>
+            <a href="{{ url_for('manager.manager_add_user') }}" class="btn btn-info">
+                新增用户
+            </a>
+        {% endif %}
+        <a href="{{ url_for('manager.manager_blog') }}" class="btn btn-info">
+            博客管理
+        </a>
+        <a href="{{ url_for('manager.manager_comment') }}" class="active btn btn-info">
+            评论管理
+        </a>
+    </div>
+{% endblock %}
+{% block page_content1 %}
+{% for comment in comments %}
+    {{ comment.blog.title }}
+    {% endfor %}
+{% endblock %}
+{% block page_content2 %}
+{% import'_macro.html'as macro %}
+    {{ macro.pagination_widget(pagination,'manager.manager_comment') }}
+{% endblock %}

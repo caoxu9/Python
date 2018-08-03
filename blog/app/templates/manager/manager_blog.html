@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        {% if current_user.is_admin() %}
+            <a href="{{ url_for('manager.manager_user') }}" class="btn btn-info">
+                用户管理
+            </a>
+            <a href="{{ url_for('manager.manager_add_user') }}" class="btn btn-info">
+                新增用户
+            </a>
+        {% endif %}
+        <a href="{{ url_for('manager.manager_blog') }}" class="active btn btn-info">
+            博客管理
+        </a>
+        <a href="{{ url_for('manager.manager_comment') }}" class="btn btn-info">
+            评论管理
+        </a>
+    </div>
+{% endblock %}
+{% block page_content1 %}
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading" align="center">博客信息</div>
+        <!-- Table -->
+        <table class="table" border="1">
+            <tr>
+                <th>标题</th>
+                <th>正文</th>
+                <th>作者</th>
+                <th>详情</th>
+                <th>删除</th>
+            </tr>
+            {% for blog in blogs %}
+                <tr>
+                    <td>{{ blog.title[0:50] }}</td>
+                    <td>{{ blog.body[0:100] | safe }}</td>
+                    <td>{{ blog.author.name }}</td>
+
+                    <td><a href="{{ url_for('main.blog',id= blog.id) }}">详情</a></td>
+                    <td><a href="{{ url_for('manager.manager_delete_blog',id=blog.id,page=pagination.page) }}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% import '_macro.html'as macro %}
+    {{ macro.pagination_widget(pagination,'manager.manager_blog') }}
+{% endblock %}

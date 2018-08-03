@@ -1,0 +1,13 @@
+{% for blog in blogs %}
+    <div class="page-header">
+        <font size="6" color="orange"><a
+                href="{{ url_for('main.blog',id=blog.id) }}">{{ blog.title }}</a></font>
+        {% if current_user == blog.author %}
+            <a href="{{ url_for('main.blog_delete',blog_id=blog.id) }}"><span
+                    class="glyphicon glyphicon-trash" style="color: red;font-size: 20px"
+                    aria-hidden="true"></span></a><br>
+        {% endif %}         <a href="{{ url_for('main.user_info',name=blog.author.name) }}" class="btn btn-link "><font size="3" color="red">{{ blog.author.name }}</font><br></a>
+        <font color="aqua">{{ blog.time }}</font><br>
+        {{ blog.body[0:100] | safe }}<br>
+    </div>
+{% endfor %}

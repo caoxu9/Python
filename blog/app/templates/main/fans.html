@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    {% for fan in fans_list %}
+        <a href="{{ url_for('main.user_info',name=fan.name) }}" class="btn panel-info">{{ fan.name }}</a>
+    {% endfor %}
+{% endblock %}

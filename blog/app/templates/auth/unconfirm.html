@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{{name}},您好！！！！！！！！！！
+<h2>
+    请进行邮箱认证
+</h2>
+<h3>点击<a href="{{url_for('auth.reset_mail')}}">这里</a>重新发送邮件</h3>
+{% endblock %}
