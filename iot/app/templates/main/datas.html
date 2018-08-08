@@ -1,0 +1,24 @@
+{% extends  'base.html' %}
+{% block page_content1 %}
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading" align="center">传感器数据</div>
+        <!-- Table -->
+        <table class="table" border="1">
+            <tr>
+                <th>编号</th>
+                <th>数据</th>
+                <th>时间</th>
+            </tr>
+            {% for data in datas %}
+                <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.data }}{{ data.sensor.unit }}</td>
+                    <td>{{ data.time }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% import '_macro.html'as macro %}
+    {{ macro.pagination_widget(pagination,'main.sensor_datas',sid= sid,did=did) }}
+{% endblock %}

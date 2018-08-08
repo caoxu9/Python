@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block bodystyle %}
+    <body class="grzx">
+{% endblock %}
+{% block page_content %}
+
+
+
+    <div class="main-container container clearfix">
+        <div class="content" id="content">
+            <div class="add-btn">
+                <a type="button" class="btn" href="{{ url_for('main.devices') }}">我的设备</a>
+            </div>
+            <div class="shebei">
+                <ul>
+                    <li>
+                        <div class="field-title clearfix">
+                            <a href="#">我是标题</a>
+                            <span>我是作者&nbsp;&nbsp;&nbsp;&nbsp;3分钟前</span>
+                        </div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvin
+                            ar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculu
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-pager">
+                <ul class="pagination">
+                    <li><a href="#">上一页</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="sidebar-second" id="sidebar">
+            <div class="block-sidebar block-sidebar-1">
+                <div class="group-btn">
+                    {% if current_user==user and not current_user.is_admin %}
+                        <a type="button" class="btn btn-edit" href="{{ url_for('main.edit_user_info') }}">编辑资料</a>
+                    {% endif %}
+                    {% if current_user.is_admin %}
+                        <a type="button" class="btn btn-edit" href="{{ url_for('main.edit_admin',id=user.id) }}">编辑资料</a>
+                    {% endif %}
+                </div>
+                <div class="block-sidebar-views">
+                    <p><span>API-KEY：</span>{{ user.api_key }}</p>
+                    <p><span>个人介绍：</span>{{ user.about_me }}</p>
+                    <p><span>位置：</span>{{ user.location }}</p>
+                    <p><span>用户类型：</span>{{ user.role.name }}</p>
+                    <p><span>邮箱：</span>{{ user.email }}</p>
+                    <p><span>验证：</span>邮箱验证通过</p>
+                    <p><span>注册时间：</span>{{ user.register_time }}</p>
+                    <p><span>最后访问时间：</span>{{ moment(user.access_time).fromNow() }}</p>
+                </div>
+                <div class="block-sidebar-footer">
+                    我的关注：20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    我的粉丝：66
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block bodystyle %}
+    <body class="index">
+{% endblock %}
+{% block page_content %}
+
+
+<div class="highlighted">
+    <div class="sliders">
+        <ul>
+            <li class="list-1"
+                style="background: url('/static/images/sliders1.jpg') center top #000 no-repeat;height: 580px;">
+                <div class="container">
+                    <div class="slider-title slider-title-animation"><img src="/static/images/sliders1-1.png"/>
+                    </div>
+                    <p class="p-animation">
+                        尚观独立研发，只能设备连接平台，设备智能化研发、接入、管理一体化<br/>
+                        平台快速、高校、低成本实现产品智能化
+                    </p>
+                    <a href="###" class="btn btn-animation">了解物联网服务器</a>
+                </div>
+            </li>
+            <li class="list-2"
+                style="background: url('/static/images/sliders1.jpg') center top #000 no-repeat;height: 580px;">
+                <div class="container">
+                    <div class="slider-title"><img src="/static/images/sliders1-1.png"/></div>
+                    <p>
+                        尚观独立研发，只能设备连接平台，设备智能化研发、接入、管理一体化<br/>
+                        平台快速、高校、低成本实现产品智能化
+                    </p>
+                    <a href="###" class="btn">了解物联网服务器</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% if not current_user.is_authenticated %}
+    <div class="slider-form">
+        <div class="slider-form-box">
+            <h2>登录</h2>
+            <div class="webfrom">
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.email(type="text",class="form-control",id="zhanghao",placeholder="请输入账号") }}
+                    </div>
+                    {% for msg in get_flashed_messages() %}
+                    <span class="btn-warning">{{ msg }}</span>
+                    {% endfor %}
+                    <div class="form-group">
+                        {{ form.password(type="password",class="form-control",id="password",
+                               placeholder="请输入密码") }}
+                    </div>
+                    <button type="submit" class="btn center-block">登录</button>
+                </form>
+            </div>
+            <div class="caozuo clearfix">
+                <div class="wangji"><a href="#">记住密码？</a></div>
+                <div class="zhuce"><a href="{{ url_for('auth.register') }}">立即注册</a></div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<div class="main-container container clearfix">
+    <div id="ditu" style="width: 1000px;height:715px;"></div>
+</div>
+
+<script src="/static/js/echarts.js"></script>
+<script src="/static/js/china.js"></script>
+<script src="/static/js/ditu.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.sliders').unslider({
+            speed: 500,
+            delay: 5000,
+            starting: function () {
+                $(".highlighted .slider-title").removeClass('slider-title-animation');
+                $(".highlighted p").removeClass('p-animation');
+                $(".highlighted li .btn").removeClass('btn-animation');
+            },
+            complete: function () {
+
+                $(".highlighted .slider-title").addClass('slider-title-animation');
+                $(".highlighted p").addClass('p-animation');
+                $(".highlighted li .btn").addClass('btn-animation');
+            },
+            dots: true
+        });
+    });
+</script>
+{% endblock %}
+</body>

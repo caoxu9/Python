@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block bodystyle %}
+    <body class="index">
+{% endblock %}
+{% block page_content %}
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        {% if current_user.is_admin() %}
+            <a href="{{ url_for('manager.manager_user') }}" class="active btn btn-info">
+                用户管理
+            </a>
+            <a href="{{ url_for('manager.manager_add_user') }}" class="btn btn-info">
+                新增用户
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block page_content1 %}
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading" align="center">用户信息</div>
+        <!-- Table -->
+        <table class="table" border="1">
+            <tr>
+                <th>邮箱</th>
+                <th>用户名</th>
+                <th>位置</th>
+                <th>详情</th>
+                <th>删除</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.location }}</td>
+                    <td><a href="{{ url_for('main.user_info',name=user.name) }}">详情</a></td>
+                    <td><a href="{{ url_for('manager.manager_delete_user',id = user.id,page=pagination.page) }}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% import '_macro.html' as macro %}
+    <div align="center">{{ macro.pagination_widget(pagination,'manager.manager_user') }}</div>
+{% endblock %}
+</body>

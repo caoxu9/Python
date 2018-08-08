@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block page_content1 %}
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading" align="center">报警数据共{{ current_user.warings.count() }}条</div>
+        <!-- Table -->
+        <table class="table" border="1">
+            <tr>
+                <th>设备ID</th>
+                <th>设备名</th>
+                <th>传感器ID</th>
+                <th>传感器名称</th>
+                <th>报警值</th>
+                <th>上限</th>
+                <th>下限</th>
+                <th>报警信息</th>
+                <th>报警时间</th>
+            </tr>
+            {% for w in warings %}
+                <tr>
+                    <td>{{ w.device.id }}</td>
+                    <td>{{ w.device.name }}</td>
+                    <td>{{ w.sensor.id }}</td>
+                    <td>{{ w.sensor.name }}</td>
+                    <td>{{ w.data }}{{ w.sensor.unit }}</td>
+                    <td>{{ w.max }}</td>
+                    <td>{{ w.min }}</td>
+                    <td>{{ w.about }}</td>
+                    <td>{{ w.time }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% import '_macro.html'as macro %}
+    {{ macro.pagination_widget(pagination,'main.waring') }}
+{% endblock %}

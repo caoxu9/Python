@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>尚观注册激活邮件</title>
+</head>
+<body>
+<h2>{{ name }}，您好！</h2><br>
+<p>这是一封账号激活邮件，点击下面的链接激活账号。链接有效时间是2小时。</p>
+<p><a href="{{ url_for('auth.confirm', token=token, _external = True) }}">激活</a></p>
+<p>by Embsky开发团队</p>
+</body>
+</html>

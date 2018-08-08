@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block bodystyle %}
+    <body class="wdsb">
+{% endblock %}
+{% block page_content %}
+    <div class="main-container container clearfix">
+        <div class="content" id="content">
+            <div class="my-shebei">
+                <h2>
+                    设备详情
+                    <a href="{{ url_for('main.add_sensor',did = d.id) }}">添加传感器</a>
+                </h2>
+                <div class="field-my">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <a href="{{ url_for('main.device_info',did=d.id) }}"><img
+                                        src="/static/images/shebei.jpg" alt="..."></a>
+                            </div>
+                        </div>
+                        <div class="left">
+                            <a href="{{ url_for('main.device_info',did=d.id) }}">
+                                <div class="field-shebeiming">我是设备名称【id：{{ d.id }}】</div>
+                            </a>
+                            <div class="field-shebeiming">描述&nbsp;:&nbsp;{{ d.about }}</div>
+                            <div class="field-shebeiming">名称：{{ d.name }}</div>
+                            <div class="field-shebeiming">位置：{{ d.location }}</div>
+                            <div class="field-shebeiming">时间：{{ moment(d.time).format('LLLL') }}</div>
+                            <a href="#" class="btn btn-info">共{{ d.sensors.count() }}个传感器</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {#          {% import '_macro.html'as macro %}#}
+            {#        {{ macro.pagination_widget(pagination,'main.devices') }}#}
+
+        </div>
+        <div class="sidebar-second" id="sidebar">
+            <div class="block-sidebar block-sidebar-2">
+                <p><img src="/static/images/banner.png"/></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_content2 %}
+    <h2>传感器</h2>
+    {% for sensor in sensors %}
+        <div class="left my-shebei field-my">
+            <div class="field-shebeiming"> 传感器id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                : {{ sensor.id }}</div>
+            <div class="field-shebeiming"> 传感器名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：{{ sensor.name }}</div>
+            <div class="field-shebeiming"> 传感器类型&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;：{{ sensor.s_type.name }}</div>
+            <div class="field-shebeiming"> 传感器描述 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ：{{ sensor.about }}</div>
+            <div class="field-shebeiming"> 传感器单位 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ：{{ sensor.unit }}</div>
+            <div class="field-shebeiming"> 传感器创建时间 ：{{ sensor.time }}</div>
+            <a href="{{ url_for('main.delete_sensor',sid=sensor.id,did = d.id) }}"
+               class="btn glyphicon glyphicon-trash btn-warning"></a>
+            <a href="{{ url_for('main.edit_sensor',sid=sensor.id,did = d.id) }}"
+               class="btn glyphicon glyphicon-cog btn-info"></a>
+            <a href="{{ url_for('main.sensor_datas',sid = sensor.id,did= d.id) }}" class="btn bg-success">共{{ sensor.datas.count() }}数据</a>
+        </div>
+    {% endfor %}
+    {% import '_macro.html'as macro %}
+    {{ macro.pagination_widget(pagination,'main.device_info',did=d.id) }}
+{% endblock %}
+</body>
