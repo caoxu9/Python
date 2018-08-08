@@ -4,8 +4,8 @@ class Config:
     MAIL_SERVER = 'smtp.qq.com'
     MAIL_PORT = '587'
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'itsdangerous@foxmail.com'
-    MAIL_PASSWORD = 'ociuaxqsfvrxdhia'
+    MAIL_USERNAME = 'xxxxxx'
+    MAIL_PASSWORD = 'xxxxxxx'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     #设置时间间隔
